@@ -23,6 +23,7 @@ public class AIController : MonoBehaviour
     Animator animator;
     GameObject player;
     Mover mover;
+    Health health;
 
     //上次看到玩家時間
     private float timeSinceLastSswPlayer = Mathf.Infinity;
@@ -39,11 +40,18 @@ public class AIController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mover = GetComponent<Mover>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+
         beginpostion = transform.position;
+
+        health.onDamage += OnDamage;
+        health.onDie += OnDead;
     }
 
     private void Update()
     {
+        if (health.IsDead()) return;
+
         //如果(玩家在追趕距離內)
         if (IsInRange())
         {
@@ -126,5 +134,16 @@ public class AIController : MonoBehaviour
     {
         timeSinceLastSswPlayer += Time.deltaTime;
         timeSinceArriveWaypoint += Time.deltaTime;
+    }
+
+    private void OnDamage()
+    {
+        //受到攻擊時，觸發的事情
+    }
+
+    private void OnDead()
+    {
+        mover.CancelInvoke();
+        animator.SetTrigger("死亡觸發");
     }
 }

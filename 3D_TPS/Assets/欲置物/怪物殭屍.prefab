@@ -540,6 +540,9 @@ GameObject:
   - component: {fileID: 8334566681584809763}
   - component: {fileID: 8334566681577642179}
   - component: {fileID: 6387071372520682565}
+  - component: {fileID: 1809701090}
+  - component: {fileID: 1809701091}
+  - component: {fileID: 9194317682169132959}
   m_Layer: 0
   m_Name: "\u602A\u7269\u6BAD\u5C4D"
   m_TagString: Enemy
@@ -573,7 +576,7 @@ Animator:
   m_GameObject: {fileID: 8334566681584904963}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e4299bf26a09e9049839e1a1b75e562c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ff29cf0d916c8dc418d06a5303cca401, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -604,6 +607,52 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1809701090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334566681584904963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aba066c168c72b45912634cc3dffa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 10
+  confuseTime: 5
+  patrol: {fileID: 0}
+  waypointToStay: 1
+  waypointToWaitTime: 3
+  patrolSpeedRatio: 0.5
+--- !u!114 &1809701091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334566681584904963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22e6998f10f04848b3469c698452582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 6
+  animatorChangeRatio: 0.1
+--- !u!114 &9194317682169132959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334566681584904963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f26146292745d44ba59af16cf6632a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &8334566681584904965
 GameObject:
   m_ObjectHideFlags: 0
