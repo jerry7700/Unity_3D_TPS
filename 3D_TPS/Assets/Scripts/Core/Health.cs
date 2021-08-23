@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     //當受到治癒效果時，觸發的委派事件，並且回傳float
     public event Action<float> onHealed;
     //當人物死亡時觸發的委派事件
-    public Action onDie;
+    public event Action onDie;
 
     private bool isDead = false;
     #endregion
@@ -65,6 +65,11 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (isDead) return;
+
+        if(gameObject.tag == "Player")
+        {
+            print("玩家目前多少血量: " + currentHealth);
+        }
 
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);

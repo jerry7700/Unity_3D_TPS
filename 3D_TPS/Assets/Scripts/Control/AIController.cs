@@ -24,6 +24,7 @@ public class AIController : MonoBehaviour
     GameObject player;
     Mover mover;
     Health health;
+    Fighter fighter;
 
     //上次看到玩家時間
     private float timeSinceLastSswPlayer = Mathf.Infinity;
@@ -41,6 +42,7 @@ public class AIController : MonoBehaviour
         mover = GetComponent<Mover>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+        fighter = GetComponent<Fighter>();
 
         beginpostion = transform.position;
 
@@ -55,9 +57,7 @@ public class AIController : MonoBehaviour
         //如果(玩家在追趕距離內)
         if (IsInRange())
         {
-            //移動到玩家前方
-            timeSinceLastSswPlayer = 0;
-            mover.MoveTo(player.transform.position, 1);
+            AttackBehviour();
         }
         else if(timeSinceLastSswPlayer < confuseTime)
         {
@@ -69,6 +69,17 @@ public class AIController : MonoBehaviour
         }
 
         UpdateTimer();
+    }
+
+    /// <summary>
+    /// 攻擊行為
+    /// </summary>
+    private void AttackBehviour()
+    {
+        animator.SetBool("是否失去敵人", false);
+        //移動到玩家前方
+        timeSinceLastSswPlayer = 0;
+        fighter.Attack(player.GetComponent<Health>());
     }
 
     /// <summary>
@@ -117,6 +128,7 @@ public class AIController : MonoBehaviour
     {
         //取消移動與攻擊
         mover.CancelMove();
+        fighter.CancelTarget();
         //困惑動作
         animator.SetBool("是否失去敵人", true);
     }
@@ -145,5 +157,11 @@ public class AIController : MonoBehaviour
     {
         mover.CancelInvoke();
         animator.SetTrigger("死亡觸發");
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, chaseDistance);
     }
 }
